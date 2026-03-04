@@ -1,7 +1,6 @@
 import React from 'react';
 import { 
   LayoutDashboard, Edit3, BookOpen, Inbox, CheckSquare, 
-  ExternalLink 
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import styles from '../styles/Assignments.module.css';

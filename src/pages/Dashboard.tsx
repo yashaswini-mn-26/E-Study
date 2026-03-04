@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import {
   LayoutDashboard, Edit3, BookOpen, Inbox, CheckSquare,
-  Settings, LogOut, HelpCircle, Search, PlayCircle,
-  Moon, ChevronLeft, ChevronRight, MoreHorizontal,
-  MoreVertical,
+  Settings, LogOut, HelpCircle, Search,
+ ChevronLeft, ChevronRight, 
   Play,
   CalendarDays,
   Presentation,
