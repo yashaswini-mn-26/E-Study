@@ -1,0 +1,141 @@
+.pageContainer {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #000;
+  color: #fff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.themeToggle {
+  cursor: pointer;
+}
+
+.mainContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.welcomeTitle {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 4rem;
+}
+
+.formWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10rem;
+  align-items: center;
+}
+
+.illustration {
+  width: 100%;
+  max-width: 550px;
+}
+
+.formSection {
+  text-align: left;
+  max-width: 450px;
+}
+
+.formTitle {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fieldIcon {
+  position: absolute;
+  left: 15px;
+  color: #999;
+}
+
+.inputWrapper input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3.2rem;
+  border: 1.5px solid #000;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.forgotPasswordRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #7ca152;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Custom Checkbox Style */
+.checkboxContainer input {
+  width: 18px;
+  height: 18px;
+  accent-color: #7ca152;
+}
+
+.loginBtn {
+  width: 100%;
+  background-color: #7ca152;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signupRedirect {
+  text-align: center;
+  margin-top: 2rem;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+.linkText {
+  color: #7ca152;
+  font-weight: 600;
+  cursor: pointer;
+}

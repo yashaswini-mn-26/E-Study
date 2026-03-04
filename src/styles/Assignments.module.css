@@ -1,0 +1,129 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: 'Jost', sans-serif;
+  overflow-y: auto;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar consistency with Settings page */
+.sidebar {
+  width: 300px;
+  background-color: #DBE4CD;
+  padding: 4rem 2.5rem;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #B4C6A6; 
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: -10px;
+  width: calc(100% + 20px);
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem 4rem;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 2.3rem;
+  font-weight: bolder;
+  margin-bottom: 1.5rem;
+}
+
+.assignmentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 3rem;
+  /* margin-bottom: 4rem; */
+}
+
+.card {
+  background-color: #F1F1F1;
+  border-radius: 20px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.subjectText {
+  color: #7CA152;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.dateInfo {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.6;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-top: 10px; */
+}
+
+.statusPending { color: #7CA152; font-weight: 600; font-size: 0.9rem; }
+.statusDone { color: #4F6D33; font-weight: 600; font-size: 0.9rem; opacity: 0.8; }
+
+.clickBtn {
+  background-color: #DBE4CD;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.summarySection {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 2;
+}
+
+.totalText {
+  color: #7CA152;
+}

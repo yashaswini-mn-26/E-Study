@@ -1,0 +1,290 @@
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: #f8f9fa;
+  font-family: 'Jost', sans-serif;
+  overflow-y: auto;
+}
+
+.sidebar {
+  width: 250px;
+  background: #fff;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #eee;
+}
+
+.logo { font-size: 2rem; font-weight: 800; margin-bottom: 4rem; }
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  border: none;
+  background: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  color: #333;
+  cursor: pointer;
+}
+
+.active { background: #000; color: #fff; }
+
+.sidebarBottom { margin-top: auto; border-top: 1px solid #eee; padding-top: 20px; }
+.navLinkSecondary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border: none;
+  background: none;
+  color: #7CA152;
+  font-weight: 600;
+  cursor: pointer;
+font-size: 14px ;
+}
+
+.main { flex: 1; padding: 1rem 2rem; }
+
+.searchBox {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto 2.5rem;
+}
+
+.searchBox input {
+  width: 100%;
+  padding: 14px 20px 14px 50px;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.searchIcon { position: absolute; left: 18px; top: 15px; color: #999; }
+
+.banner {
+  background: #F7F9F2;
+  border-radius: 30px;
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.bannerText h2 { color: #7CA152; font-weight: 500; }
+.bannerText h1 { font-size: 2rem; margin-top: 10px; max-width: 400px; }
+
+.joinBtn {
+  background: #7CA152;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statsRow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 2rem; }
+.statCard { padding: 15px; border-radius: 20px; text-align: center; }
+.statIcon { font-size: 2rem; }
+
+.chartsGrid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 25px; margin-bottom: 2rem; }
+.chartBox { background: #fff; border: 1px solid #eee; border-radius: 25px; padding: 25px; }
+.chartTitle { margin-bottom: 15px; font-size: 1.3rem; }
+
+.barChartContainer { display: flex; height: 180px; align-items: flex-end; margin-top: 20px; }
+.yAxis { height: 100%; display: flex; flex-direction: column; justify-content: space-between; font-size: 0.8rem; color: #999; padding-right: 15px; }
+.barsRow { flex: 1; display: flex; justify-content: space-around; align-items: flex-end; }
+.barColumn { display: flex; flex-direction: column; align-items: center; width: 45px; }
+.barStack { width: 100%; height: 140px; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column-reverse; }
+
+.segStudy { background: #7CA152; }
+.segAssign { background: #B4C6A6; }
+.segExams { background: #8E9BAB; }
+
+/* Radial Chart */
+.radialProgress {
+  width: 140px; height: 140px; border-radius: 50%;
+  background: conic-gradient(#7F9651 80%, #eee 0);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;
+}
+.radialInner {
+  width: 110px; height: 110px; background: #fff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; color: #7CA152;
+}
+
+/* Course Grid */
+.courseGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.courseCard { background: #fff; border: 1px solid #eee; border-radius: 20px; padding: 12px; }
+.courseThumb { width: 100%; border-radius: 15px; margin-bottom: 12px; }
+.progressBar { height: 6px; background: #eee; border-radius: 3px; flex: 1; margin-right: 10px; }
+.progressBar div { height: 100%; background: #7CA152; border-radius: 3px; }
+
+/* Right Panel Elements */
+.rightPanel { width: 300px; background: #fff; border-left: 1px solid #eee; padding: 2.5rem 1.5rem; }
+.avatar { width: 60px; border-radius: 50%; }
+.editBtn { background: none; border: none; font-weight: 700; cursor: pointer; }
+.calendarCard { background: #f9f9f9; padding: 20px; border-radius: 20px; margin: 2rem 0; }
+.calGrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center; margin-top: 15px; }
+.activeDate { background: #000; color: #fff; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 30px;
+  margin-bottom: 2rem;
+}
+
+.chartBox {
+  background: #ffffff;
+  border: 1px solid #e9e9e9;
+  border-radius: 22px;
+  padding: 20px 20px;
+}
+
+.chartTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+
+.legend {
+  display: flex;
+  gap: 25px;
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+}
+
+.barChartContainer {
+  display: flex;
+  align-items: flex-end;
+  height: 200px;
+  margin-top: 10px;
+}
+
+.yAxis {
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #9a9a9a;
+  padding-right: 15px;
+}
+
+.barsRow {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.barColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45px;
+}
+
+.barStack {
+  width: 100%;
+  height: 160px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  background: #f3f3f3;
+}
+
+.segStudy { background: #7CA152; }
+.segAssign { background: #B4C6A6; }
+.segExams { background: #8E9BAB; }
+
+.monthLabel {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+
+.performanceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown {
+  font-size: 0.75rem;
+  background: #f3f3f3;
+  padding: 6px 14px;
+  border-radius: 12px;
+  color: #666;
+}
+
+
+.progressLegend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  margin: 15px 0 25px;
+  color: #666;
+}
+
+
+.radialContainer {
+  text-align: center;
+}
+
+.radialProgress {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  background: conic-gradient(
+    #7CA152 0% 80%,
+    #e6e6e6 80% 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radialInner {
+  width: 120px;
+  height: 120px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #7CA152;
+}
+
+.progressText {
+  font-size: 0.9rem;
+  color: #444;
+}

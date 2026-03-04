@@ -1,0 +1,139 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: 'Jost', sans-serif;
+  overflow-y: auto;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 300px;
+  background-color: #DBE4CD;
+  padding: 4rem 2.5rem;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.active {
+  font-weight: 700;
+}
+
+/* Content Area Styling */
+.mainContent {
+  flex: 1;
+  padding: 2rem 4rem;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.assignmentTitle {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.subjectHeader {
+  color: #7CA152;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.instructionText {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.4;
+  max-width: 900px;
+  margin-bottom: 1rem;
+}
+
+.listTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.orderedList {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-left: 1.5rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Upload Section Styling */
+.uploadTitle {
+  color: #7CA152;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.fileInputBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  padding: 4px 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.placeholderText {
+  color: #999;
+  font-size: 1rem;
+}
+
+.chooseFileBtn {
+  background-color: #B4C6A6;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.linkInput {
+  width: 600px;
+  padding: 6px 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 12px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  outline: none;
+}
+
+.linkInput::placeholder {
+  color: #9e9d9d;
+}
+
+.deadlineText {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}

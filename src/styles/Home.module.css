@@ -1,0 +1,130 @@
+.homeContainer {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: #000;
+  color: #fff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.outlineBtn {
+  background: transparent;
+  border: 1.5px solid #fff;
+  color: #fff;
+  padding: 0.4rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.iconBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Hero Titles */
+.heroHeader {
+  text-align: center;
+  padding: 4rem 1rem 2rem;
+}
+
+.heroHeader h1 {
+  font-size: 4.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.heroHeader p {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.greenText {
+  color: #7ca152;
+}
+
+/* The subtle divider line from the image */
+.dividerLine {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124, 161, 82, 0.3), transparent);
+  margin: 1rem 0;
+}
+
+/* Main Layout */
+.mainContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 2rem 10%;
+  gap: 4rem;
+}
+
+.headline {
+  font-size: 3.8rem;
+  line-height: 1.1;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 3rem;
+  max-width: 500px;
+}
+
+.primaryBtn {
+  background-color: #7ca152;
+  color: white;
+  border: none;
+  padding: 0.7rem 2.2rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(124, 161, 82, 0.2);
+}
+
+.loginText {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.greenLink {
+  color: #7ca152;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.imageSection img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
