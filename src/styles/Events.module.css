@@ -1,0 +1,104 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  font-family: 'Jost', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar consistency with E-Study branding */
+.sidebar {
+  width: 300px;
+  background-color: #DBE4CD; /* The signature light green sidebar */
+  padding: 4rem 2.5rem;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #000;
+  cursor: pointer;
+}
+
+/* Main Content Area */
+.mainContent {
+  flex: 1;
+  padding: 2rem 4rem;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+
+.eventsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 500px); /* Specific card widths from design */
+  gap: 3rem;
+}
+
+.eventCard {
+  border-radius: 30px;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+  min-height: 280px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.eventTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  /* margin-bottom: 1rem; */
+}
+
+.eventDetails {
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.6;
+  /* margin-bottom: 1rem; */
+}
+
+.joinBtn {
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle dark overlay for button */
+  border: none;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.joinBtn:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Specific layout for the 3rd card to match the image offset */
+.eventsGrid div:nth-child(3) {
+  grid-column: 1;
+}

@@ -1,0 +1,187 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  font-family: 'Jost', sans-serif;
+
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  background-color: #DBE4CD;
+  padding: 3rem 1.5rem;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.active {
+  background: #B4C6A6;
+  padding: 10px;
+  border-radius: 10px;
+  width: calc(100% + 10px);
+  margin-left: -5px;
+}
+
+/* Main Content Area */
+.mainContent {
+  flex: 1;
+  background-color: #fff;
+  padding: 2rem 4rem;
+  overflow-y: auto;
+}
+
+.mainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.searchContainer {
+  position: relative;
+  width: 80%;
+}
+
+.searchContainer input {
+  width: 100%;
+  padding: 12px 20px 12px 50px;
+  border: 1.5px solid #000;
+  border-radius: 15px;
+  font-size: 1rem;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 15px;
+  top: 12px;
+  color: #999;
+}
+
+.subTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Course Grid */
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-bottom: 2rem;
+}
+
+.courseCard {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.thumbnail {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.courseTitle {
+  padding: 10px 15px 5px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.progressContainer {
+  padding: 0 15px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #7CA152;
+  border-radius: 4px;
+}
+
+.progressLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #aaa;
+  margin-bottom: 15px;
+}
+
+.authorSection {
+  padding: 0 15px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.authorAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.authorName {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.authorRole {
+  font-size: 0.65rem;
+  color: #aaa;
+}
+
+.footerAction {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 3rem;
+}
+
+.seeMoreBtn {
+  background-color: #DBE4CD;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+}

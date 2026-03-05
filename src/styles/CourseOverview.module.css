@@ -1,0 +1,162 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  font-family: 'Jost', sans-serif;
+
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar consistency */
+.sidebar {
+  width: 280px;
+  background-color: #DBE4CD;
+  padding: 3rem 1.5rem;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.active {
+  background: #B4C6A6;
+  padding: 10px;
+  border-radius: 10px;
+  width: calc(90%);
+  margin-left: -5px;
+}
+
+/* Content Layout */
+.mainContent {
+  flex: 1;
+  display: flex;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.videoSection {
+  flex: 0.4;
+  padding: 2rem 4rem;
+  overflow-y: auto;
+  border-right: 2px solid #ddd;
+}
+
+.pageTitle {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.videoPlayer {
+  position: relative;
+  width: 100%;
+  border-radius: 25px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.mainThumb {
+  width: 100%;
+  display: block;
+}
+
+.playOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(146, 146, 146);
+  cursor: pointer;
+}
+
+.videoTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.mainProgressTrack {
+  height: 8px;
+  background: #eee;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.mainProgressFill {
+  height: 100%;
+  background: #7CA152;
+  border-radius: 4px;
+}
+
+.progressLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 1rem;
+}
+
+.authorRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 1.5rem;
+}
+
+.authorImg { width: 45px; border-radius: 50%; }
+.authorName { font-weight: 700; font-size: 1.1rem; }
+.authorRole { color: #aaa; font-size: 0.9rem; }
+
+.roadmapTitle { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.7rem; }
+.roadmapList { list-style: none; font-size: 1rem; font-weight: 500; line-height: 2.2; }
+
+/* Playlist Panel */
+.playlistPanel {
+  flex: 0.35;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.playlistCard {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.miniThumb {
+  width: 140px;
+  border-radius: 10px;
+}
+
+.playlistInfo h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+.playlistInfo p { font-size: 0.8rem; color: #aaa; }
+.playlistInfo small { font-size: 0.75rem; color: #ccc; }

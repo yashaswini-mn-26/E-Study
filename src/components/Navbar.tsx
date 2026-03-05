@@ -5,7 +5,9 @@ import styles from '../styles/Navbar.module.css';
 const Navbar: React.FC = () => {
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logoGroup}>
+      <div className={styles.logoGroup} onClick={()=>{
+        window.location.href="/Dashboard"
+      }} style={{cursor: "pointer"}}>
         <BookOpen className={styles.logoIcon} size={28} strokeWidth={2.5} />
         <span className={styles.brandName}>E-Study</span>
       </div>

@@ -12,7 +12,9 @@ const Home: React.FC = () => {
           <span>E-Study</span>
         </div>
         <div className={styles.navActions}>
-          <button className={styles.outlineBtn}>Log in</button>
+          <button className={styles.outlineBtn} onClick={()=>{
+            window.location.href="/Login"
+          }}>Log in</button>
           <button className={styles.outlineBtn} onClick={()=>{
             window.location.href="/Signup"
           }}>Sign in</button>

@@ -23,3 +23,6 @@ button {
   cursor: pointer;
   font-family: 'Jost', sans-serif;
 }
+.page-content-wrapper {
+  padding-top: 70px; /* This prevents content from being hidden behind the fixed navbar */
+}

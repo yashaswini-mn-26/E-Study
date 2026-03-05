@@ -1,0 +1,135 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  font-family: 'Jost', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+/* Sidebar consistency */
+.sidebar {
+  width: 300px;
+  background-color: #DBE4CD; /* The specific light green sidebar */
+  padding: 4rem 2.5rem;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: #000;
+}
+
+.active {
+  background-color: #B4C6A6; /* Active highlight */
+  padding: 12px 15px;
+  border-radius: 12px;
+  margin-left: -15px;
+  width: calc(100% + 30px);
+}
+
+/* Main Area */
+.mainContent {
+  flex: 1;
+  padding: 2rem 4rem;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.subTitle {
+  color: #7CA152;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Course Grid and Cards */
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 320px); /* Specific widths from image */
+  gap: 3rem;
+}
+
+.courseCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.thumbnail {
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.titleRow h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  max-width: 320px;
+  line-height: 1.3;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #7CA152;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.progressContainer {
+  margin-top: 10px;
+}
+
+.progressBar {
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #7CA152; /* Primary theme green */
+  border-radius: 4px;
+}
+
+.progressLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #aaa;
+  font-weight: 500;
+}
