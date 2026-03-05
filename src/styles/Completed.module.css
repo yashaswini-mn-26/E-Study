@@ -3,13 +3,21 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  overflow: auto;
+  overflow: hidden; 
   font-family: 'Jost', sans-serif;
 }
 
 .container {
   display: flex;
   flex: 1;
+  height: calc(100vh - 70px); 
+}
+
+.mainContent {
+  flex: 1;
+  background-color: #fff;
+  padding: 2rem 4rem;
+  overflow-y: auto; 
 }
 
 /* Sidebar consistency - Kept for fallback, MenuBar handles this */
