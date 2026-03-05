@@ -51,7 +51,6 @@
   border-radius: 3px;
 }
 
-
 .logo { font-size: 2rem; font-weight: 800; margin-bottom: 4rem; display: flex; align-items: center;}
 
 .navLink {
@@ -147,3 +146,169 @@
 .calGrid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; text-align: center; margin-top: 15px; }
 .calDays { display: flex; justify-content: space-between; font-size: 12px; color: grey; }
 .activeDate { background: #000; color: #fff; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+
+
+
+/* --- HAMBURGER MENU SPECIFIC STYLES --- */
+.mobileHeader {
+  display: none; /* Hidden on desktop */
+}
+
+.hamburgerBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  display: flex;
+  align-items: center;
+}
+
+.overlay {
+  display: none;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 1200px) {
+  .statsRow { grid-template-columns: repeat(2, 1fr) !important; }
+  .courseGrid { grid-template-columns: repeat(2, 1fr) !important; }
+  .chartsGrid { grid-template-columns: 1fr !important; }
+  .sidebar { width: 220px !important; padding: 1.5rem 1rem !important; }
+  .rightPanel { width: 260px !important; }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column !important;
+    height: auto !important;
+    overflow-y: visible !important;
+  }
+  
+  .mobileHeader {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  /* Make BOTH the white and green sidebars slide in */
+  .sidebar, .greenSidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: -100% !important; 
+    width: 250px !important;
+    height: 100vh !important;
+    z-index: 2000 !important;
+    transition: left 0.3s ease !important;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2) !important;
+  }
+  
+  .sidebar { padding-top: 2rem !important; background: #fff !important; }
+  .greenSidebar { padding-top: 5rem !important; } /* Extra room for green sidebar */
+  
+  .sidebar.open, .greenSidebar.open {
+    left: 0 !important; 
+  }
+
+  .overlay {
+    display: block !important;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 1500;
+  }
+
+  /* This floats over your black Navbar on mobile */
+  .floatingHamburger {
+    display: block !important;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: black;
+    border: none;
+    z-index: 2001;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .nav, .navGroup {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .main, .rightPanel {
+    width: 100% !important;
+    height: auto !important;
+    border-right: none !important;
+    border-left: none !important;
+    overflow-y: visible !important;
+  }
+  
+  .rightPanel {
+    border-top: 1px solid #eee !important;
+    padding: 2rem !important;
+  }
+  
+  .banner {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 15px !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .statsRow, .courseGrid {
+    grid-template-columns: 1fr !important;
+  }
+  .barChartContainer {
+    overflow-x: auto !important; 
+    padding-bottom: 10px;
+  }
+}
+/* --- GREEN SIDEBAR STYLES (For Non-Dashboard Pages) --- */
+.greenSidebar {
+  width: 250px;
+  background-color: #DBE4CD;
+  padding: 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border-right: 1px solid #eee;
+  flex-shrink: 0;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #000;
+  cursor: pointer;
+  text-align: left;
+  padding: 10px 0;
+}
+
+.activeGreen {
+  background-color: #B4C6A6;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: -10px;
+  width: calc(100% + 20px);
+}
+
+.floatingHamburger {
+  display: none; /* Hidden on desktop */
+}

@@ -1,19 +1,27 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100vh; /* Lock to exact screen height */
   width: 100vw;
-  overflow: auto;
+  overflow: hidden; /* Prevent the whole page from scrolling */
   font-family: 'Jost', sans-serif;
-
 }
 
 .container {
   display: flex;
   flex: 1;
+  /* margin-top: 70px; */
+  height: calc(100vh - 70px); /* Fills the rest of the screen perfectly */
 }
 
-/* Sidebar Styling */
+.mainContent {
+  flex: 1;
+  background-color: #fff;
+  padding: 2rem 4rem;
+  overflow-y: auto; /* THIS allows ONLY the course cards to scroll! */
+}
+
+/* Sidebar Styling - Kept for fallback, but MenuBar handles this! */
 .sidebar {
   width: 250px;
   background-color: #DBE4CD;
@@ -46,12 +54,12 @@
 }
 
 /* Main Content Area */
-.mainContent {
+/* .mainContent {
   flex: 1;
   background-color: #fff;
   padding: 2rem 4rem;
   overflow-y: auto;
-}
+} */
 
 .mainHeader {
   display: flex;
@@ -184,4 +192,53 @@
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 1200px) {
+  /* Scale grid down from 4 to 3 columns on small laptops */
+  .courseGrid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column !important;
+  }
+  
+  .mainContent {
+    padding: 2rem !important;
+  }
+  
+  /* Stack the header and search bar */
+  .mainHeader {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 15px !important;
+  }
+  
+  .searchContainer {
+    width: 100% !important;
+  }
+  
+  /* Scale grid down to 2 columns on tablets */
+  .courseGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainContent {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .pageTitle {
+    font-size: 2.2rem !important;
+  }
+  
+  /* Scale grid down to 1 column on phones */
+  .courseGrid {
+    grid-template-columns: 1fr !important;
+  }
 }

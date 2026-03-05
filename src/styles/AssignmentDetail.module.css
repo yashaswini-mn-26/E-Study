@@ -3,17 +3,17 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+  overflow: hidden; /* Lock the page scroll */
   font-family: 'Jost', sans-serif;
-  overflow-y: auto;
 }
 
 .container {
   display: flex;
   flex: 1;
+  height: calc(100vh - 70px);
 }
 
-/* Sidebar Styling */
+/* Sidebar consistency (MenuBar handles this) */
 .sidebar {
   width: 300px;
   background-color: #DBE4CD;
@@ -37,16 +37,12 @@
   cursor: pointer;
 }
 
-.active {
-  font-weight: 700;
-}
-
 /* Content Area Styling */
 .mainContent {
   flex: 1;
   padding: 2rem 4rem;
   background-color: #fff;
-  overflow-y: auto;
+  overflow-y: auto; /* Only content scrolls */
 }
 
 .assignmentTitle {
@@ -97,7 +93,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   padding: 4px 10px;
   border: 1.5px solid #ccc;
   border-radius: 12px;
@@ -119,8 +116,9 @@
 }
 
 .linkInput {
-  width: 600px;
-  padding: 6px 10px;
+  width: 100%;
+  max-width: 600px;
+  padding: 8px 10px;
   border: 1.5px solid #ccc;
   border-radius: 12px;
   font-size: 1rem;
@@ -136,4 +134,37 @@
   font-size: 1rem;
   font-weight: 700;
   margin-top: 0.5rem;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column !important;
+  }
+  
+  .mainContent {
+    padding: 2rem !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainContent {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .assignmentTitle {
+    font-size: 1.8rem !important;
+  }
+  
+  .subjectHeader {
+    font-size: 1.4rem !important;
+  }
+  
+  .instructionText, .listTitle, .orderedList {
+    font-size: 1rem !important;
+  }
+  
+  .fileInputBox {
+    max-width: 100% !important;
+  }
 }

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import {
-  LayoutDashboard, Edit3, BookOpen, Inbox, CheckSquare,
-  Settings, LogOut, HelpCircle, Search,
-  ChevronLeft, ChevronRight, Play, GraduationCap, Presentation, CalendarDays
+  Search, ChevronLeft, ChevronRight, Play, Presentation, CalendarDays, GraduationCap, BookOpen
 } from 'lucide-react';
 import styles from '../styles/Dashboard.module.css';
+import MenuBar from '../components/MenuBar';
 
 const Dashboard: React.FC = () => {
-  // --- NEW DYNAMIC LOGIC ---
   const [currentDate, setCurrentDate] = useState(new Date());
   const [period, setPeriod] = useState("Monthly");
 
@@ -19,7 +17,6 @@ const Dashboard: React.FC = () => {
 
   const progress = progressData[period];
 
-  // Calendar calculations
   const monthName = currentDate.toLocaleString('default', { month: 'long' });
   const year = currentDate.getFullYear();
   const daysInMonth = new Date(year, currentDate.getMonth() + 1, 0).getDate();
@@ -34,7 +31,6 @@ const Dashboard: React.FC = () => {
     const newDate = new Date(currentDate.setMonth(currentDate.getMonth() + offset));
     setCurrentDate(new Date(newDate));
   };
-  // --------------------------
 
   const courses = [
     {
@@ -69,34 +65,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/* SIDEBAR */}
-      <aside className={styles.sidebar}>
-        <div className={styles.logo}>
-          <GraduationCap size={32} style={{ marginRight: '10px' }} /> E-Study
-        </div>
-        <nav className={styles.nav}>
-          <button className={`${styles.navLink} ${styles.active}`} style={{ width: "200px" }}>
-            <LayoutDashboard size={22} /> Dashboard
-          </button>
-          <button className={styles.navLink} style={{ backgroundColor: "rgb(0,0,0, 0.08)", width: "200px" }} onClick={() => window.location.href = "/Assignments"}>
-            <Edit3 size={22} /> Assignments
-          </button>
-          <button className={styles.navLink} style={{ backgroundColor: "rgb(0,0,0, 0.08)", width: "200px" }} onClick={() => window.location.href = "/Courses"}>
-            <BookOpen size={22} /> Courses
-          </button>
-          <button className={styles.navLink} style={{ backgroundColor: "rgb(0,0,0, 0.08)", width: "200px" }} onClick={() => window.location.href = "/Inbox"}>
-            <Inbox size={22} /> Inbox
-          </button>
-          <button className={styles.navLink} style={{ backgroundColor: "rgb(0,0,0, 0.08)", width: "200px" }} onClick={()=>{
-            window.location.href="/Completed"
-          }}><CheckSquare size={22} /> Completed</button>
-        </nav>
-        <div className={styles.sidebarBottom}>
-          <button className={styles.navLinkSecondary} onClick={() => window.location.href = '/Settings'}><Settings size={20} /> Settings</button>
-          <button className={styles.navLinkSecondary} onClick={() => window.location.href = '/Login'}><LogOut size={20} /> Logout</button>
-          <button className={styles.navLinkSecondary} onClick={() => window.location.href = '/Help'}><HelpCircle size={20} /> Help Center</button>
-        </div>
-      </aside>
+      {/* OUR NEW MENUBAR COMPONENT */}
+      <MenuBar activePage="Dashboard" />
 
       {/* MAIN CONTENT */}
       <main className={styles.main}>
@@ -142,7 +112,6 @@ const Dashboard: React.FC = () => {
             >
               <Play size={10} color="#7f9651" fill="#7f9651" />
             </span>
-
             Join Now
           </button>
         </section>

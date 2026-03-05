@@ -57,3 +57,29 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 1rem 1.5rem; /* Reduce padding on tablets and phones */
+  }
+  
+  .userName {
+    display: none; /* Hide the username on smaller screens to save space */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .brandName {
+    display: none; /* Hide 'E-Study' text on very small phones, keep the book icon */
+  }
+  
+  .avatarWrapper {
+    width: 38px; /* Make the avatar slightly smaller */
+    height: 38px;
+  }
+}

@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   BookOpen, 
   Moon, 
-  ArrowLeft, 
   User, 
   Mail, 
   Lock 
@@ -15,8 +14,8 @@ const Signup: React.FC = () => {
       {/* Top Navigation Bar */}
       <nav className={styles.navbar}>
         <div className={styles.navLeft}>
-          <ArrowLeft className={styles.backIcon} size={24} />
-          <div className={styles.logo}>
+          {/* <ArrowLeft className={styles.backIcon} size={24} /> */}
+          <div className={styles.logo} onClick={() => window.location.href='/'} style={{ cursor: 'pointer' }}>
             <BookOpen size={24} />
             <span>E-Study</span>
           </div>

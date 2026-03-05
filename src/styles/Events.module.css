@@ -54,7 +54,7 @@
 
 .eventsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 500px); /* Specific card widths from design */
+  grid-template-columns: repeat(2, 550px); /* Specific card widths from design */
   gap: 3rem;
 }
 
@@ -101,4 +101,71 @@
 /* Specific layout for the 3rd card to match the image offset */
 .eventsGrid div:nth-child(3) {
   grid-column: 1;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 1400px) {
+  /* On slightly smaller laptops, let the cards shrink instead of strictly 550px */
+  .eventsGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column !important;
+  }
+  .pageTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+  text-align: center;
+}
+  
+  .mainContent {
+    padding: 2rem !important;
+  }
+  
+  /* Stack the event cards vertically on tablets/phones */
+  .eventsGrid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  /* Reset the specific layout for the 3rd card so it doesn't break the column */
+  .eventsGrid div:nth-child(3) {
+    grid-column: auto !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainContent {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .pageTitle {
+    font-size: 2.2rem !important;
+  }
+  
+    .pageTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+  text-align: center;
+}
+  .eventCard {
+    min-height: auto !important;
+    padding: 2rem 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+  
+  .eventTitle {
+    font-size: 1.3rem !important;
+  }
+  
+  .eventDetails {
+    font-size: 1.1rem !important;
+  }
 }

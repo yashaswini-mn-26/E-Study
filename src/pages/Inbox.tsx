@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { 
-  LayoutDashboard, Edit3, BookOpen, Inbox as InboxIcon, CheckSquare, 
-  Search, Phone, Video, Paperclip, Smile, Camera, Mic 
+  Search, Phone, Video, Paperclip, Smile, Camera, Mic, ArrowLeft 
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import MenuBar from '../components/MenuBar'; 
 import styles from '../styles/Inbox.module.css';
 
 interface Contact {
@@ -19,6 +19,9 @@ const Inbox: React.FC = () => {
     time: "Yesterday 10:50 am",
     lastSeen: "2:02 pm"
   });
+
+  // NEW: State to track if we should show the chat window on mobile
+  const [showChatOnMobile, setShowChatOnMobile] = useState(false);
 
   // State for Search
   const [mentorSearch, setMentorSearch] = useState("");
@@ -46,23 +49,22 @@ const Inbox: React.FC = () => {
   const handleVideoCall = () => alert(`Starting video chat with ${activeUser.name}...`);
   const handleEmojiClick = () => alert("Emoji picker opened!");
 
+  // NEW: Handle clicking a contact (opens chat on mobile)
+  const handleContactClick = (user: Contact) => {
+    setActiveUser(user);
+    setShowChatOnMobile(true);
+  };
+
   return (
     <div className={styles.wrapper}>
       <Navbar />
       <div className={styles.container}>
-        {/* SIDEBAR */}
-        <aside className={styles.sidebar}>
-          <nav className={styles.navGroup}>
-            <button className={styles.navItem}><LayoutDashboard size={22} /> Dashboard</button>
-            <button className={styles.navItem}><Edit3 size={22} /> Assignments</button>
-            <button className={styles.navItem}><BookOpen size={22} /> Courses</button>
-            <button className={`${styles.navItem} ${styles.active}`}><InboxIcon size={22} /> Inbox</button>
-            <button className={styles.navItem}><CheckSquare size={22} /> Completed</button>
-          </nav>
-        </aside>
+        
+        {/* OUR NEW MENUBAR COMPONENT */}
+        <MenuBar activePage="Inbox" />
 
-        {/* MESSAGES LIST COLUMN */}
-        <section className={styles.messagesList}>
+        {/* MESSAGES LIST COLUMN - Hides on mobile when viewing a chat */}
+        <section className={`${styles.messagesList} ${showChatOnMobile ? styles.hideOnMobile : ''}`}>
           <h1 className={styles.pageTitle}>Inbox</h1>
           
           <div className={styles.searchBox}>
@@ -80,7 +82,7 @@ const Inbox: React.FC = () => {
               <div 
                 key={i} 
                 className={`${styles.contactItem} ${activeUser.name === m.name ? styles.activeContact : ''}`}
-                onClick={() => setActiveUser(m)}
+                onClick={() => handleContactClick(m)}
               >
                 <img src="/yashaswini.png" alt="Avatar" className={styles.contactAvatar} />
                 <div className={styles.contactInfo}>
@@ -106,7 +108,7 @@ const Inbox: React.FC = () => {
               <div 
                 key={i} 
                 className={`${styles.contactItem} ${activeUser.name === s.name ? styles.activeContact : ''}`}
-                onClick={() => setActiveUser(s)}
+                onClick={() => handleContactClick(s)}
               >
                 <img src="/yashaswini.png" alt="Avatar" className={styles.contactAvatar} />
                 <div className={styles.contactInfo}>
@@ -118,10 +120,18 @@ const Inbox: React.FC = () => {
           </div>
         </section>
 
-        {/* ACTIVE CHAT WINDOW */}
-        <section className={styles.chatWindow}>
+        {/* ACTIVE CHAT WINDOW - Hides on mobile when viewing the contact list */}
+        <section className={`${styles.chatWindow} ${!showChatOnMobile ? styles.hideOnMobile : ''}`}>
           <header className={styles.chatHeader}>
             <div className={styles.activeUser}>
+              {/* NEW: Back Button specifically for Mobile view */}
+              <button 
+                className={styles.mobileBackBtn} 
+                onClick={() => setShowChatOnMobile(false)}
+              >
+                <ArrowLeft size={24} />
+              </button>
+
               <img src="/yashaswini.png" alt={activeUser.name} className={styles.headerAvatar} />
               <div>
                 <h4>{activeUser.name}</h4>
@@ -135,7 +145,6 @@ const Inbox: React.FC = () => {
           </header>
 
           <div className={styles.chatBody}>
-            {/* Logic: These would eventually come from a messages state array based on activeUser.name */}
             <div className={styles.msgIn}>
               <div className={styles.bubbleIn}>Hey! There</div>
             </div>

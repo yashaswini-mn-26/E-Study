@@ -209,3 +209,61 @@
 .contactItem:hover {
   background-color: #f9f9f9;
 }
+
+/* --- WHATSAPP-LIKE MOBILE CSS --- */
+
+/* Hide the mobile back button on Desktop */
+.mobileBackBtn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #000;
+  padding: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: row !important; /* Keep side-by-side logic, but we will hide one at a time */
+    overflow: hidden; /* Prevent horizontal scroll */
+  }
+  
+  /* Both take 100% width on mobile */
+  .messagesList, .chatWindow {
+    width: 100% !important;
+    height: calc(100vh - 70px) !important; /* Height minus navbar */
+    border-right: none !important;
+  }
+  
+  /* Magic class: If this is active, the element disappears completely */
+  .hideOnMobile {
+    display: none !important;
+  }
+
+  /* Show the back button on mobile so users can leave the chat */
+  .mobileBackBtn {
+    display: flex !important;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  /* Smaller padding on phones to save space */
+  .chatHeader { padding: 15px !important; }
+  .chatBody { padding: 20px 15px !important; }
+  .chatFooter { padding: 15px !important; }
+  
+  /* Make chat bubbles wrap better on tiny screens */
+  .msgIn, .msgOut { max-width: 85% !important; }
+  
+  /* Adjust input box on small screens */
+  .inputExtras { gap: 10px !important; }
+  .headerIcons { gap: 10px !important; }
+  
+  /* Make the avatar a bit smaller on phone headers */
+  .headerAvatar {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}

@@ -12,7 +12,7 @@
   font-family: 'Jost', sans-serif;
 }
 
-/* SIDEBAR - Exactly matching the light green background */
+/* SIDEBAR - Kept here just in case, but MenuBar handles this now! */
 .sidebar {
   width: 300px;
   background-color: #DBE4CD;
@@ -109,4 +109,38 @@
   color: #000;
   cursor: pointer;
   padding-bottom: 2rem;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column !important;
+  }
+  
+  .settingsBody {
+    padding: 2rem !important; /* Reduces padding on tablets and phones */
+  }
+  
+  .logoutFooter {
+    margin-top: 4rem !important; /* Pushes logout down so it doesn't crowd options */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: 2rem !important;
+  }
+  
+  .optionItem {
+    gap: 15px !important; /* Brings icons and text closer together */
+  }
+  
+  .optionItem span {
+    font-size: 1rem !important;
+  }
+  
+  .logoutFooter {
+    font-size: 1.2rem !important;
+    padding-bottom: 1rem !important;
+  }
 }

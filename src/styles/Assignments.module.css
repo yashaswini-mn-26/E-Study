@@ -3,17 +3,17 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+  overflow: hidden; /* Locks the page from scrolling */
   font-family: 'Jost', sans-serif;
-  overflow-y: auto;
 }
 
 .container {
   display: flex;
   flex: 1;
+  height: calc(100vh - 70px); /* Fills the rest of the screen */
 }
 
-/* Sidebar consistency with Settings page */
+/* Sidebar consistency (MenuBar handles this, but keeping it safe) */
 .sidebar {
   width: 300px;
   background-color: #DBE4CD;
@@ -49,7 +49,7 @@
   flex: 1;
   padding: 2rem 4rem;
   background-color: #fff;
-  overflow-y: auto;
+  overflow-y: auto; /* ONLY the content area scrolls! */
 }
 
 .title {
@@ -62,7 +62,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 3rem;
-  /* margin-bottom: 4rem; */
+  margin-bottom: 3rem; /* Gives space before the summary section */
 }
 
 .card {
@@ -101,7 +101,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-top: 10px; */
 }
 
 .statusPending { color: #7CA152; font-weight: 600; font-size: 0.9rem; }
@@ -126,4 +125,30 @@
 
 .totalText {
   color: #7CA152;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column !important;
+  }
+  
+  .mainContent {
+    padding: 2rem !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainContent {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .title {
+    font-size: 2rem !important;
+  }
+  
+  .assignmentGrid {
+    grid-template-columns: 1fr !important; /* Stack completely on phones */
+    gap: 1.5rem !important;
+  }
 }

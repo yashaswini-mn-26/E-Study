@@ -1,8 +1,7 @@
 import React from 'react';
-import { 
-  LayoutDashboard, Edit3, BookOpen, Inbox, CheckSquare, 
-} from 'lucide-react';
+import { Edit3 } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import MenuBar from '../components/MenuBar'; // <-- Imported MenuBar
 import styles from '../styles/Assignments.module.css';
 
 const Assignments: React.FC = () => {
@@ -18,20 +17,9 @@ const Assignments: React.FC = () => {
     <div className={styles.wrapper}>
       <Navbar />
       <div className={styles.container}>
-        {/* SIDEBAR - Matching the Settings page green */}
-        <aside className={styles.sidebar}>
-          <nav className={styles.navGroup}>
-            <button className={styles.navItem} onClick={()=>{
-                window.location.href="/Dashboard"
-            }}><LayoutDashboard size={22} /> Dashboard</button>
-            <button className={`${styles.navItem} ${styles.active}`} onClick={() => {window.location.href="/Assignments"}}>
-              <Edit3 size={22} /> Assignments
-            </button>
-            <button className={styles.navItem}><BookOpen size={22} /> Courses</button>
-            <button className={styles.navItem}><Inbox size={22} /> Inbox</button>
-            <button className={styles.navItem}><CheckSquare size={22} /> Completed</button>
-          </nav>
-        </aside>
+        
+        {/* OUR SMART MENUBAR COMPONENT */}
+        <MenuBar activePage="Assignments" />
 
         {/* MAIN CONTENT */}
         <main className={styles.mainContent}>

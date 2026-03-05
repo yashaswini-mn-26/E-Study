@@ -41,7 +41,7 @@
 .welcomeTitle {
   font-size: 2.5rem;
   font-weight: 600;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .formWrapper {
@@ -63,7 +63,7 @@
 
 .formTitle {
   font-size: 2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   font-weight: 600;
 }
 
@@ -152,4 +152,56 @@
   font-weight: 500;
   color: #7ca152;
   cursor: pointer;
+}
+
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 900px) {
+  /* Tablet Adjustments: Stack the illustration and the form */
+  .formWrapper {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+    justify-items: center;
+  }
+  
+  .illustrationSection {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    order: 1; /* Keeps image on top */
+  }
+  
+  .formSection {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 450px;
+    order: 2; /* Keeps form below image */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  /* Mobile Adjustments: Scale down text and image */
+  .mainContent {
+    padding: 2rem 1rem !important;
+  }
+  
+  .welcomeTitle {
+    font-size: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .formWrapper {
+    gap: 1.5rem !important;
+  }
+  
+  .illustration {
+    max-width: 280px !important;
+  }
+  
+  .formTitle {
+    font-size: 1.8rem !important;
+  }
+  
+  .navLeft {
+    gap: 0.8rem !important;
+  }
 }

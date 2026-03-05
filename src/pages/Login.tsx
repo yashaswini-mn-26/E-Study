@@ -7,7 +7,7 @@ const Login: React.FC = () => {
     <div className={styles.pageContainer}>
       {/* Header matching the design */}
       <nav className={styles.navbar}>
-        <div className={styles.logo}>
+        <div className={styles.logo} onClick={() => window.location.href='/'} style={{ cursor: 'pointer' }}>
           <BookOpen size={24} />
           <span>E-Study</span>
         </div>

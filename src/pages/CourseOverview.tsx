@@ -1,9 +1,7 @@
 import React from 'react';
-import { 
-  LayoutDashboard, Edit3, BookOpen, Inbox, CheckSquare, 
-  PlayCircle 
-} from 'lucide-react';
+import { PlayCircle } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import MenuBar from '../components/MenuBar'; // <-- Imported MenuBar
 import styles from '../styles/CourseOverview.module.css';
 
 const CourseOverview: React.FC = () => {
@@ -33,16 +31,9 @@ const CourseOverview: React.FC = () => {
     <div className={styles.wrapper}>
       <Navbar />
       <div className={styles.container}>
-        {/* SIDEBAR */}
-        <aside className={styles.sidebar}>
-          <nav className={styles.navGroup}>
-            <button className={styles.navItem}><LayoutDashboard size={22} /> Dashboard</button>
-            <button className={styles.navItem}><Edit3 size={22} /> Assignments</button>
-            <button className={`${styles.navItem} ${styles.active}`}><BookOpen size={22} /> Courses</button>
-            <button className={styles.navItem}><Inbox size={22} /> Inbox</button>
-            <button className={styles.navItem}><CheckSquare size={22} /> Completed</button>
-          </nav>
-        </aside>
+        
+        {/* OUR SMART MENUBAR COMPONENT */}
+        <MenuBar activePage="Courses" />
 
         {/* MAIN CONTENT AREA */}
         <main className={styles.mainContent}>

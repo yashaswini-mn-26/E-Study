@@ -1,8 +1,7 @@
 import React from 'react';
-import { 
-  LayoutDashboard, Edit3, BookOpen, Inbox, CheckSquare, CheckCircle2 
-} from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import MenuBar from '../components/MenuBar'; // <-- Imported MenuBar
 import styles from '../styles/Completed.module.css';
 
 const Completed: React.FC = () => {
@@ -31,26 +30,9 @@ const Completed: React.FC = () => {
     <div className={styles.wrapper}>
       <Navbar />
       <div className={styles.container}>
-        {/* SIDEBAR - Consistent with dashboard theme */}
-        <aside className={styles.sidebar}>
-          <nav className={styles.navGroup}>
-            <button className={styles.navItem} onClick={() => window.location.href='/Dashboard'}>
-              <LayoutDashboard size={22} /> Dashboard
-            </button>
-            <button className={styles.navItem} onClick={() => window.location.href='/Assignments'}>
-              <Edit3 size={22} /> Assignments
-            </button>
-            <button className={styles.navItem} onClick={() => window.location.href='/Courses'}>
-              <BookOpen size={22} /> Courses
-            </button>
-            <button className={styles.navItem} onClick={() => window.location.href='/Inbox'}>
-              <Inbox size={22} /> Inbox
-            </button>
-            <button className={`${styles.navItem} ${styles.active}`}>
-              <CheckSquare size={22} /> Completed
-            </button>
-          </nav>
-        </aside>
+        
+        {/* OUR SMART MENUBAR COMPONENT */}
+        <MenuBar activePage="Completed" />
 
         {/* MAIN CONTENT AREA */}
         <main className={styles.mainContent}>
@@ -92,4 +74,4 @@ const Completed: React.FC = () => {
   );
 };
 
-export default Completed;
+export default Completed;   
