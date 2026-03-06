@@ -4,6 +4,8 @@ import {
   Settings, LogOut, HelpCircle, GraduationCap, Menu, X
 } from 'lucide-react';
 import styles from '../styles/Dashboard.module.css';
+import { useDispatch } from 'react-redux';
+import { logout } from '../store/authSlice';
 
 interface MenuBarProps {
   activePage: string;
@@ -11,7 +13,13 @@ interface MenuBarProps {
 
 const MenuBar: React.FC<MenuBarProps> = ({ activePage }) => {
   const [isOpen, setIsOpen] = useState(false);
-  
+  const dispatch = useDispatch();
+
+const handleLogout = () => {
+  dispatch(logout()); 
+  // Note: Since we put the redirect logic inside the Slice earlier, 
+  // it will automatically send you to /Login!
+};
   // This tells the component if it should be White (Dashboard) or Green (Other pages)
   const isDashboard = activePage === 'Dashboard';
 
@@ -96,7 +104,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ activePage }) => {
         {isDashboard && (
           <div className={styles.sidebarBottom}>
             <button className={styles.navLinkSecondary} onClick={() => window.location.href = '/Settings'}><Settings size={20} /> Settings</button>
-            <button className={styles.navLinkSecondary} onClick={() => window.location.href = '/Login'}><LogOut size={20} /> Logout</button>
+            <button className={styles.navLinkSecondary} onClick={handleLogout}><LogOut size={20} /> Logout</button>
             <button className={styles.navLinkSecondary} onClick={() => window.location.href = '/Help'}><HelpCircle size={20} /> Help Center</button>
           </div>
         )}
