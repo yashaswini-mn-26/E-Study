@@ -110,7 +110,7 @@ const Signup: React.FC = () => {
                   <Lock className={styles.fieldIcon} size={20} />
                   <input
                     type={showPassword ? "text" : "password"} 
-                    placeholder="Min. 8 chars, 1 num, 1 special"
+                    placeholder=" Enter Password"
                     required
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     className={styles.passwordInput}
@@ -121,7 +121,9 @@ const Signup: React.FC = () => {
                   >
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </div>
+                
                 </div>
+                <p style={{fontSize:"12px", marginLeft:"10px", marginTop:"2px", color:"green"}}>*Minimum 8 Characters with atleast 1 numerical and 1 special character</p>
               </div>
 
               <button type="submit" className={styles.signupBtn}>Sign Up</button>
@@ -160,7 +162,7 @@ const Signup: React.FC = () => {
                   size="large"
                   text="continue_with"
                   shape="rectangular"
-                  width="380"
+                  width="100%"
                   logo_alignment="center"
                 />
               </GoogleOAuthProvider>
