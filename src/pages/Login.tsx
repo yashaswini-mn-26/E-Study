@@ -15,10 +15,9 @@ const Login: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // --- STANDARD EMAIL/PASSWORD LOGIN ---
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError(''); 
 
     try {
       const response = await fetch(API.login || 'http://localhost:5000/api/auth/login', {
@@ -41,10 +40,9 @@ const Login: React.FC = () => {
     }
   };
 
-  // --- GOOGLE OAUTH LOGIN ---
   const handleGoogleSuccess = async (credentialResponse: any) => {
     try {
-      const res = await fetch('http://localhost:5000/api/auth/google', {
+      const res = await fetch(API.google || 'http://localhost:5000/api/auth/google', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ idToken: credentialResponse.credential }),
@@ -84,7 +82,6 @@ const Login: React.FC = () => {
           <div className={styles.formSection}>
             <h2 className={styles.formTitle}>Log in</h2>
             
-            {/* Display error messages cleanly */}
             {error && <p style={{ color: '#ff4d4d', fontSize: '0.9rem', marginBottom: '10px', background: '#fff5f5', padding: '8px', borderRadius: '5px', borderLeft: '4px solid #ff4d4d' }}>{error}</p>}
 
             <form className={styles.loginForm} onSubmit={handleLogin}>
@@ -120,7 +117,6 @@ const Login: React.FC = () => {
                 </div>
               </div>
 
-              {/* FORGOT PASSWORD LINK */}
               <div style={{ textAlign: 'right', marginBottom: '1.5rem', marginTop: '-0.5rem' }}>
                 <span 
                   className={styles.linkText} 
@@ -136,7 +132,7 @@ const Login: React.FC = () => {
 
             <div className={styles.divider} style={{textAlign:"center", marginTop:"10px", marginBottom:"10px", color:"grey"}}><span>or</span></div>
 
-            {/* PRODUCTION READY GOOGLE BUTTON */}
+            {/* STYLED GOOGLE BUTTON */}
             <div className={styles.googleBtnContainer} style={{ marginBottom: '1.5rem' }}>
               <GoogleOAuthProvider clientId="566226555996-7om82596lnn0q7kh6tp0ttqueeb43bdn.apps.googleusercontent.com">
                 <GoogleLogin
@@ -146,8 +142,9 @@ const Login: React.FC = () => {
                   theme="outline"
                   size="large"
                   text="continue_with"
-                  shape="circle"
+                  shape="rectangular"
                   width="100%"
+                  logo_alignment="center"
                 />
               </GoogleOAuthProvider>
             </div>

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { BookOpen, Moon, User, Mail, Lock, Eye, EyeOff } from 'lucide-react'; // Added Eye icons
+import { BookOpen, Moon, User, Mail, Lock, Eye, EyeOff } from 'lucide-react'; 
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../store/authSlice';
 import styles from '../styles/Signup.module.css';
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'; // Imported Provider
 import { API } from "../config/api";
 
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // New state for visibility
+  const [showPassword, setShowPassword] = useState(false); 
   const dispatch = useDispatch();
 
   const validateForm = () => {
@@ -53,8 +53,6 @@ const Signup: React.FC = () => {
     }
   };
 
-
-
   return (
     <div className={styles.pageContainer}>
       <nav className={styles.navbar}>
@@ -80,7 +78,6 @@ const Signup: React.FC = () => {
             {error && <p className={styles.errorMessage}>{error}</p>}
 
             <form className={styles.signupForm} onSubmit={handleSignup}>
-              {/* Username & Email inputs stay the same... */}
               <div className={styles.inputGroup}>
                 <label>Username</label>
                 <div className={styles.inputWrapper}>
@@ -107,13 +104,12 @@ const Signup: React.FC = () => {
                 </div>
               </div>
 
-              {/* PASSWORD INPUT WITH EYE TOGGLE */}
               <div className={styles.inputGroup}>
                 <label>Password</label>
                 <div className={styles.inputWrapper}>
                   <Lock className={styles.fieldIcon} size={20} />
                   <input
-                    type={showPassword ? "text" : "password"} // Switches type
+                    type={showPassword ? "text" : "password"} 
                     placeholder="Min. 8 chars, 1 num, 1 special"
                     required
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -131,31 +127,44 @@ const Signup: React.FC = () => {
               <button type="submit" className={styles.signupBtn}>Sign Up</button>
             </form>
 
-            <div className={styles.divider}><span>or</span></div>
+            <div className={styles.divider} style={{textAlign:"center", marginTop:"10px", marginBottom:"10px", color:"grey"}}><span>or</span></div>
 
-            <GoogleLogin
-              onSuccess={async (credentialResponse) => {
-                console.log("Google success:", credentialResponse);
+            {/* STYLED GOOGLE BUTTON */}
+            <div className={styles.googleBtnContainer} style={{ marginBottom: '1.5rem' }}>
+              <GoogleOAuthProvider clientId="566226555996-7om82596lnn0q7kh6tp0ttqueeb43bdn.apps.googleusercontent.com">
+                <GoogleLogin
+                  onSuccess={async (credentialResponse) => {
+                    console.log("Google success:", credentialResponse);
+                    const token = credentialResponse.credential;
 
-                const token = credentialResponse.credential;
+                    const res = await fetch(API.google, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({ idToken: token }),
+                    });
 
-                const res = await fetch(API.google, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({ idToken: token }),
-                });
+                    const data = await res.json();
 
-                const data = await res.json();
-
-                if (res.ok) {
-                  dispatch(loginSuccess({ user: data.user, token: data.token }));
-                  window.location.href = "/Dashboard";
-                }
-              }}
-              onError={() => console.log("Login Failed")}
-            />
+                    if (res.ok) {
+                      dispatch(loginSuccess({ user: data.user, token: data.token }));
+                      window.location.href = "/Dashboard";
+                    } else {
+                      setError(data.msg || "Google Signup failed");
+                    }
+                  }}
+                  onError={() => console.log("Login Failed")}
+                  useOneTap
+                  theme="outline"
+                  size="large"
+                  text="continue_with"
+                  shape="rectangular"
+                  width="100%"
+                  logo_alignment="center"
+                />
+              </GoogleOAuthProvider>
+            </div>
 
             <p className={styles.loginRedirect}>
               Already have an account? <span className={styles.linkText} onClick={() => window.location.href = "/Login"}>Log in</span>
