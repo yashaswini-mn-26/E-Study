@@ -14,7 +14,7 @@ const ForgotPassword: React.FC = () => {
     setError('');
 
     try {
-      const response = await fetch( 'https://e-studyy.vercel.app/api/auth/forgot-password', {
+      const response = await fetch( 'https://e-study-backend.onrender.com/api/auth/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
