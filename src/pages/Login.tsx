@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import { BookOpen, Moon, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { loginSuccess } from '../store/authSlice';
 import styles from '../styles/Login.module.css';
 import { API } from "../config/api";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [showPassword, setShowPassword] = useState(false); // State for visibility toggle
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  // --- STANDARD EMAIL/PASSWORD LOGIN ---
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(''); // Clear previous errors
+
     try {
-      const response = await fetch(API.login, {
+      const response = await fetch(API.login || 'http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -23,20 +31,42 @@ const Login: React.FC = () => {
 
       if (response.ok) {
         dispatch(loginSuccess({ user: data.user, token: data.token }));
-        window.location.href = "/Dashboard";
+        navigate("/Dashboard");
       } else {
-        alert(data.msg || "Login failed");
+        setError(data.msg || "Login failed");
       }
     } catch (err) {
       console.error("Login Error:", err);
-      alert("Make sure your backend server is running on port 5000!");
+      setError("Server is not responding. Make sure your backend is running!");
+    }
+  };
+
+  // --- GOOGLE OAUTH LOGIN ---
+  const handleGoogleSuccess = async (credentialResponse: any) => {
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ idToken: credentialResponse.credential }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        dispatch(loginSuccess({ user: data.user, token: data.token }));
+        navigate("/Dashboard");
+      } else {
+        setError(data.msg || "Google Login failed");
+      }
+    } catch (err) {
+      setError("Connection to server failed");
     }
   };
 
   return (
     <div className={styles.pageContainer}>
       <nav className={styles.navbar}>
-        <div className={styles.logo} onClick={() => window.location.href='/'} style={{ cursor: 'pointer' }}>
+        <div className={styles.logo} onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
           <BookOpen size={24} />
           <span>E-Study</span>
         </div>
@@ -45,6 +75,7 @@ const Login: React.FC = () => {
 
       <main className={styles.mainContent}>
         <h1 className={styles.welcomeTitle}>👋 Welcome Back</h1>
+        
         <div className={styles.formWrapper}>
           <div className={styles.illustrationSection}>
             <img src="/Login.png" alt="Student studying" className={styles.illustration} />
@@ -52,6 +83,10 @@ const Login: React.FC = () => {
 
           <div className={styles.formSection}>
             <h2 className={styles.formTitle}>Log in</h2>
+            
+            {/* Display error messages cleanly */}
+            {error && <p style={{ color: '#ff4d4d', fontSize: '0.9rem', marginBottom: '10px', background: '#fff5f5', padding: '8px', borderRadius: '5px', borderLeft: '4px solid #ff4d4d' }}>{error}</p>}
+
             <form className={styles.loginForm} onSubmit={handleLogin}>
               <div className={styles.inputGroup}>
                 <label>Email</label>
@@ -71,7 +106,7 @@ const Login: React.FC = () => {
                 <div className={styles.inputWrapper}>
                   <Lock className={styles.fieldIcon} size={20} />
                   <input 
-                    type={showPassword ? "text" : "password"} // Dynamic type switching
+                    type={showPassword ? "text" : "password"} 
                     placeholder="Enter Your Password" 
                     required
                     onChange={(e) => setFormData({...formData, password: e.target.value})}
@@ -85,10 +120,40 @@ const Login: React.FC = () => {
                 </div>
               </div>
 
+              {/* FORGOT PASSWORD LINK */}
+              <div style={{ textAlign: 'right', marginBottom: '1.5rem', marginTop: '-0.5rem' }}>
+                <span 
+                  className={styles.linkText} 
+                  style={{ fontSize: '0.9rem', cursor: 'pointer', fontWeight: 500 }}
+                  onClick={() => navigate("/forgot-password")}
+                >
+                  Forgot Password?
+                </span>
+              </div>
+
               <button type="submit" className={styles.loginBtn}>Log in</button>
             </form>
+
+            <div className={styles.divider} style={{textAlign:"center", marginTop:"10px", marginBottom:"10px", color:"grey"}}><span>or</span></div>
+
+            {/* PRODUCTION READY GOOGLE BUTTON */}
+            <div className={styles.googleBtnContainer} style={{ marginBottom: '1.5rem' }}>
+              <GoogleOAuthProvider clientId="566226555996-7om82596lnn0q7kh6tp0ttqueeb43bdn.apps.googleusercontent.com">
+                <GoogleLogin
+                  onSuccess={handleGoogleSuccess}
+                  onError={() => setError("Google Login window closed or failed")}
+                  useOneTap
+                  theme="outline"
+                  size="large"
+                  text="continue_with"
+                  shape="circle"
+                  width="100%"
+                />
+              </GoogleOAuthProvider>
+            </div>
+
             <p className={styles.signupRedirect}>
-              Don't have an account? <span className={styles.linkText} onClick={() => window.location.href="/Signup"}>Sign up</span>
+              Don't have an account? <span className={styles.linkText} onClick={() => navigate("/Signup")}>Sign up</span>
             </p>
           </div>
         </div>

@@ -19,6 +19,8 @@ import Courses from './pages/Courses';
 import CourseOverview from './pages/CourseOverview';
 import Events from './pages/Events';
 import Completed from './pages/Completed';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 const AppContent: React.FC = () => {
   const dispatch = useDispatch();
@@ -66,7 +68,7 @@ const AppContent: React.FC = () => {
         <ProtectedRoute>
           <Dashboard />
         </ProtectedRoute>
-      }/>
+      } />
       <Route path="/Settings" element={<Settings />} />
       <Route path="/Assignments" element={<Assignments />} />
       <Route path="/AssignmentDetail" element={<AssignmentDetail />} />
@@ -75,6 +77,8 @@ const AppContent: React.FC = () => {
       <Route path="/CourseOverview" element={<CourseOverview />} />
       <Route path="/Events" element={<Events />} />
       <Route path="/Completed" element={<Completed />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
