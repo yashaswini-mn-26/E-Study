@@ -143,7 +143,7 @@ const Login: React.FC = () => {
                   size="large"
                   text="continue_with"
                   shape="rectangular"
-                  width="100%"
+                  width="380"
                   logo_alignment="center"
                 />
               </GoogleOAuthProvider>
