@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BookOpen, Mail, ArrowLeft } from 'lucide-react';
 import styles from '../styles/Login.module.css'; // Reusing your beautiful styles!
-// import { API } from "../config/api";
+import { API } from "../config/api";
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ const ForgotPassword: React.FC = () => {
     setError('');
 
     try {
-      const response = await fetch( 'https://e-study-backend.onrender.com/api/auth/forgot-password', {
+      const response = await fetch(API.forgot, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

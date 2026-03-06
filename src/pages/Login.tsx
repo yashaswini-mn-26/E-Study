@@ -20,7 +20,7 @@ const Login: React.FC = () => {
     setError(''); 
 
     try {
-      const response = await fetch(API.login || 'http://localhost:5000/api/auth/login', {
+      const response = await fetch(API.login, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -42,7 +42,7 @@ const Login: React.FC = () => {
 
   const handleGoogleSuccess = async (credentialResponse: any) => {
     try {
-      const res = await fetch(API.google || 'http://localhost:5000/api/auth/google', {
+      const res = await fetch(API.google, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ idToken: credentialResponse.credential }),

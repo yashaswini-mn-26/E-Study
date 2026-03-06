@@ -4,4 +4,6 @@ export const API = {
   signup: `${API_URL}/api/auth/signup`,
   login: `${API_URL}/api/auth/login`,
   google: `${API_URL}/api/auth/google`,
+  forgot: `${API_URL}/api/auth/forgot-password`,
+  reset: (token: string) => `${API_URL}/api/auth/reset-password/${token}`
 };
