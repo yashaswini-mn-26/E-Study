@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import styles from '../styles/Dashboard.module.css';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // <-- 1. Imported useNavigate
 import { logout } from '../store/authSlice';
 
 interface MenuBarProps {
@@ -14,12 +15,14 @@ interface MenuBarProps {
 const MenuBar: React.FC<MenuBarProps> = ({ activePage }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // <-- 2. Initialized navigate
 
-const handleLogout = () => {
-  dispatch(logout()); 
-  // Note: Since we put the redirect logic inside the Slice earlier, 
-  // it will automatically send you to /Login!
-};
+  const handleLogout = () => {
+    dispatch(logout()); 
+    // Note: Since we put the redirect logic inside the Slice earlier, 
+    // it will automatically send you to /Login!
+  };
+
   // This tells the component if it should be White (Dashboard) or Green (Other pages)
   const isDashboard = activePage === 'Dashboard';
 
@@ -62,7 +65,7 @@ const handleLogout = () => {
           <button 
             className={`${isDashboard ? styles.navLink : styles.navItem} ${activePage === 'Dashboard' ? (isDashboard ? styles.active : styles.activeGreen) : ''}`} 
             style={isDashboard ? { width: "200px", backgroundColor: activePage === 'Dashboard' ? "#000" : "rgba(0,0,0, 0.08)" } : {}}
-            onClick={() => window.location.href = "/Dashboard"}
+            onClick={() => navigate("/Dashboard")} // <-- Updated!
           >
             <LayoutDashboard size={22} /> Dashboard
           </button>
@@ -70,7 +73,7 @@ const handleLogout = () => {
           <button 
             className={`${isDashboard ? styles.navLink : styles.navItem} ${activePage === 'Assignments' ? (isDashboard ? styles.active : styles.activeGreen) : ''}`} 
             style={isDashboard ? { width: "200px", backgroundColor: (activePage as string) === 'Assignments' ? "#000" : "rgba(0,0,0, 0.08)" } : {}} 
-            onClick={() => window.location.href = "/Assignments"}
+            onClick={() => navigate("/Assignments")} // <-- Updated!
           >
             <Edit3 size={22} /> Assignments
           </button>
@@ -78,7 +81,7 @@ const handleLogout = () => {
           <button 
             className={`${isDashboard ? styles.navLink : styles.navItem} ${activePage === 'Courses' ? (isDashboard ? styles.active : styles.activeGreen) : ''}`} 
             style={isDashboard ? { width: "200px", backgroundColor: (activePage as string) === 'Courses' ? "#000" : "rgba(0,0,0, 0.08)" } : {}} 
-            onClick={() => window.location.href = "/Courses"}
+            onClick={() => navigate("/Courses")} // <-- Updated!
           >
             <BookOpen size={22} /> Courses
           </button>
@@ -86,7 +89,7 @@ const handleLogout = () => {
           <button 
             className={`${isDashboard ? styles.navLink : styles.navItem} ${activePage === 'Inbox' ? (isDashboard ? styles.active : styles.activeGreen) : ''}`} 
             style={isDashboard ? { width: "200px", backgroundColor: (activePage as string) === 'Inbox' ? "#000" : "rgba(0,0,0, 0.08)" } : {}} 
-            onClick={() => window.location.href = "/Inbox"}
+            onClick={() => navigate("/Inbox")} // <-- Updated!
           >
             <Inbox size={22} /> Inbox
           </button>
@@ -94,7 +97,7 @@ const handleLogout = () => {
           <button 
             className={`${isDashboard ? styles.navLink : styles.navItem} ${activePage === 'Completed' ? (isDashboard ? styles.active : styles.activeGreen) : ''}`} 
             style={isDashboard ? { width: "200px", backgroundColor: (activePage as string) === 'Completed' ? "#000" : "rgba(0,0,0, 0.08)" } : {}} 
-            onClick={() => window.location.href = "/Completed"}
+            onClick={() => navigate("/Completed")} // <-- Updated!
           >
             <CheckSquare size={22} /> Completed
           </button>
@@ -103,9 +106,9 @@ const handleLogout = () => {
         {/* BOTTOM LINKS - Only show on Dashboard */}
         {isDashboard && (
           <div className={styles.sidebarBottom}>
-            <button className={styles.navLinkSecondary} onClick={() => window.location.href = '/Settings'}><Settings size={20} /> Settings</button>
+            <button className={styles.navLinkSecondary} onClick={() => navigate('/Settings')}><Settings size={20} /> Settings</button> {/* <-- Updated! */}
             <button className={styles.navLinkSecondary} onClick={handleLogout}><LogOut size={20} /> Logout</button>
-            <button className={styles.navLinkSecondary} onClick={() => window.location.href = '/Help'}><HelpCircle size={20} /> Help Center</button>
+            <button className={styles.navLinkSecondary} onClick={() => navigate('/Help')}><HelpCircle size={20} /> Help Center</button> {/* <-- Updated! */}
           </div>
         )}
       </aside>

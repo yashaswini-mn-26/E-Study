@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Provider, useDispatch } from 'react-redux'; // <-- Added Redux hooks
-import { store } from './store'; // <-- Import the store we created
-import { loginSuccess } from './store/authSlice'; // <-- Import the login action
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Provider, useDispatch } from 'react-redux';
+import { store } from './store';
+import { loginSuccess } from './store/authSlice';
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
-import { useNavigate } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Signup from './pages/Signup';
@@ -43,7 +42,15 @@ const AppContent: React.FC = () => {
         if (response.ok) {
           const userData = await response.json();
           dispatch(loginSuccess({ user: userData, token }));
-          navigate("/Dashboard");
+          
+          // THE FIX: Check where the user currently is
+          const currentPath = window.location.pathname;
+          const publicPages = ['/', '/Login', '/Signup'];
+          
+          // ONLY force them to the Dashboard if they are on a login/signup/home page
+          if (publicPages.includes(currentPath)) {
+            navigate("/Dashboard");
+          }
         } else {
           localStorage.removeItem('token');
         }
@@ -55,7 +62,8 @@ const AppContent: React.FC = () => {
     };
 
     verifyUser();
-  }, [dispatch, navigate]);
+  
+  }, []); 
 
   if (loading) return <div>Loading...</div>;
 
@@ -64,19 +72,19 @@ const AppContent: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/Signup" element={<Signup />} />
       <Route path="/Login" element={<Login />} />
-      <Route path="/Dashboard" element={
-        <ProtectedRoute>
-          <Dashboard />
-        </ProtectedRoute>
-      } />
-      <Route path="/Settings" element={<Settings />} />
-      <Route path="/Assignments" element={<Assignments />} />
-      <Route path="/AssignmentDetail" element={<AssignmentDetail />} />
-      <Route path="/Inbox" element={<Inbox />} />
-      <Route path="/Courses" element={<Courses />} />
-      <Route path="/CourseOverview" element={<CourseOverview />} />
-      <Route path="/Events" element={<Events />} />
-      <Route path="/Completed" element={<Completed />} />
+      
+      {/* PROTECTED ROUTES */}
+      <Route path="/Dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+      <Route path="/Settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+      <Route path="/Assignments" element={<ProtectedRoute><Assignments /></ProtectedRoute>} />
+      <Route path="/AssignmentDetail" element={<ProtectedRoute><AssignmentDetail /></ProtectedRoute>} />
+      <Route path="/Inbox" element={<ProtectedRoute><Inbox /></ProtectedRoute>} />
+      <Route path="/Courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
+      <Route path="/CourseOverview" element={<ProtectedRoute><CourseOverview /></ProtectedRoute>} />
+      <Route path="/Events" element={<ProtectedRoute><Events /></ProtectedRoute>} />
+      <Route path="/Completed" element={<ProtectedRoute><Completed /></ProtectedRoute>} />
+      
+      {/* PUBLIC ROUTES */}
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password/:token" element={<ResetPassword />} />
       <Route path="*" element={<Navigate to="/" />} />

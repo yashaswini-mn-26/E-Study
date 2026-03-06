@@ -1,3 +1,5 @@
+
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const API = {
@@ -5,5 +7,6 @@ export const API = {
   login: `${API_URL}/api/auth/login`,
   google: `${API_URL}/api/auth/google`,
   forgot: `${API_URL}/api/auth/forgot-password`,
+  dashboard:`${API_URL}/api/dashboard`,
   reset: (token: string) => `${API_URL}/api/auth/reset-password/${token}`
 };

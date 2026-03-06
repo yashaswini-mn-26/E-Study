@@ -12,7 +12,6 @@ const ForgotPassword: React.FC = () => {
     e.preventDefault();
     setMessage('');
     setError('');
-
     try {
       const response = await fetch(API.forgot, {
         method: 'POST',

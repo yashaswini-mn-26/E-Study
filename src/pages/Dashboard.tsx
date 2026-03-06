@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Search, ChevronLeft, ChevronRight, Play, Presentation, CalendarDays, GraduationCap, BookOpen
 } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // <-- Imported useNavigate
 import styles from '../styles/Dashboard.module.css';
 import MenuBar from '../components/MenuBar';
+// Make sure you have your API URL configured correctly in this file
+import { API } from '../config/api';
 
 const Dashboard: React.FC = () => {
+  // --- NAVIGATION ---
+  const navigate = useNavigate(); // <-- Initialized navigate
+
+  // --- REDUX STATE ---
+  const { user, token } = useSelector((state: any) => state.auth);
+
+  // --- DATABASE STATE ---
+  const [enrolledCourses, setEnrolledCourses] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<any[]>([]);
+  const [events, setEvents] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // --- CALENDAR & CHART STATE (UNTOUCHED) ---
   const [currentDate, setCurrentDate] = useState(new Date());
   const [period, setPeriod] = useState("Monthly");
 
@@ -32,43 +49,49 @@ const Dashboard: React.FC = () => {
     setCurrentDate(new Date(newDate));
   };
 
-  const courses = [
-    {
-      title: "Beginner's Guide To Become Web Developer",
-      thumbnail: "https://img.youtube.com/vi/rfscVS0vtbw/maxresdefault.jpg",
-      author: "Prashanth Kumar",
-      role: "Web Developer",
-      progress: 53
-    },
-    {
-      title: "Beginner's Guide To Become Python Developer",
-      thumbnail: "https://img.youtube.com/vi/rfscVS0vtbw/maxresdefault.jpg",
-      author: "Kupasagar",
-      role: "Python Developer",
-      progress: 33
-    },
-    {
-      title: "Beginner's Guide To Become Java Developer",
-      thumbnail: "https://img.youtube.com/vi/rfscVS0vtbw/maxresdefault.jpg",
-      author: "Naveen Reddy",
-      role: "Java Developer",
-      progress: 87
-    },
-    {
-      title: "Beginner's Guide for Machine Learning",
-      thumbnail: "https://img.youtube.com/vi/GwIo3gDZCVQ/maxresdefault.jpg",
-      author: "Harish Chowdary",
-      role: "Expert in Machine Learning",
-      progress: 11
+  // --- FETCH DATA FROM BACKEND ---
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        // Adjust this URL if your API config uses a different property for the base URL
+        const backendUrl = API.dashboard;
+
+        const response = await fetch(backendUrl, {
+          method: 'GET',
+          headers: {
+            'x-auth-token': token,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setEnrolledCourses(data.enrolledCourses || []);
+          setTasks(data.tasks || []);
+          setEvents(data.events || []);
+        }
+      } catch (error) {
+        console.error("Failed to fetch dashboard data", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (token) {
+      fetchDashboardData();
+    } else {
+      setIsLoading(false);
     }
-  ];
+  }, [token]);
+
+  if (isLoading) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>Loading Dashboard...</div>;
+  }
 
   return (
     <div className={styles.container}>
-      {/* OUR NEW MENUBAR COMPONENT */}
       <MenuBar activePage="Dashboard" />
 
-      {/* MAIN CONTENT */}
       <main className={styles.main}>
         <div className={styles.header}>
           <div className={styles.searchBox}>
@@ -79,8 +102,19 @@ const Dashboard: React.FC = () => {
 
         <section className={styles.banner} style={{ backgroundColor: "rgba(0, 0, 0, 0.05)", padding: "3%" }}>
           <div className={styles.bannerText}>
-            <h3 style={{ color: "#7F9651" }}>Hello Yashaswini.. ✨</h3>
-            <h2 style={{ color: "black", fontWeight: "600" }}>Sharpen your skills with professional Online Courses</h2>
+            {/* DYNAMIC USERNAME */}
+            <h3 style={{ color: "#7F9651" }}>
+              Hello {
+                user?.name
+                  ? user.name.split(' ')[0].charAt(0).toUpperCase() +
+                  user.name.split(' ')[0].slice(1)
+                  : 'Student'
+              }.. ✨
+            </h3>
+
+            <h2 style={{ color: "black", fontWeight: "600" }}>
+              Sharpen your skills with professional Online Courses
+            </h2>
           </div>
           <button
             style={{
@@ -132,7 +166,8 @@ const Dashboard: React.FC = () => {
             <h2>1k+</h2>
             <p>Expert Tutors</p>
           </div>
-          <div className={styles.statCard} style={{ backgroundColor: "#D1E1E9", cursor: "pointer" }} onClick={() => window.location.href = "/Events"}>
+          {/* --- UPDATED NAVIGATION HERE --- */}
+          <div className={styles.statCard} style={{ backgroundColor: "#D1E1E9", cursor: "pointer" }} onClick={() => navigate("/Events")}>
             <CalendarDays size={35} />
             <h2>View Events</h2>
             <p>Upcoming Events</p>
@@ -187,29 +222,43 @@ const Dashboard: React.FC = () => {
 
         <h3 style={{ marginBottom: "10px" }}>Continue Watching</h3>
         <div className={styles.courseGrid}>
-          {courses.map((course, idx) => (
-            <div key={idx} className={styles.courseCard}>
-              <img src={course.thumbnail} alt={course.title} className={styles.courseThumb} />
-              <p style={{ fontSize: "14px", marginBottom: "5px", fontWeight: "bold" }}>{course.title}</p>
-              <div className={styles.progressRow}>
-                <div className={styles.progressBar}><div style={{ width: `${course.progress}%` }}></div></div>
-                <span style={{ fontSize: "12px", color: "grey" }}>{course.progress}% Completed</span>
+          {/* DYNAMIC COURSES WITH EMPTY STATE */}
+          {enrolledCourses.length > 0 ? (
+            enrolledCourses.map((enrollment, idx) => (
+              <div key={idx} className={styles.courseCard}>
+                <img src={enrollment.course.thumbnail} alt={enrollment.course.title} className={styles.courseThumb} />
+                <p style={{ fontSize: "14px", marginBottom: "5px", fontWeight: "bold" }}>{enrollment.course.title}</p>
+                <div className={styles.progressRow}>
+                  <div className={styles.progressBar}><div style={{ width: `${enrollment.progress}%` }}></div></div>
+                  <span style={{ fontSize: "12px", color: "grey" }}>{enrollment.progress}% Completed</span>
+                </div>
+                <div className={styles.authorRow} style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "10px" }}>
+                  <img src={`https://i.pravatar.cc/150?u=${idx}`} alt={enrollment.course.authorName} style={{ height: "40px", borderRadius: "50%" }} />
+                  <p style={{ fontSize: "12px" }}><strong>{enrollment.course.authorName}</strong><br /> {enrollment.course.authorRole}</p>
+                </div>
               </div>
-              <div className={styles.authorRow} style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "10px" }}>
-                <img src={`https://i.pravatar.cc/150?u=${idx}`} alt={course.author} style={{ height: "40px", borderRadius: "50%" }} />
-                <p style={{ fontSize: "12px" }}><strong>{course.author}</strong><br /> {course.role}</p>
-              </div>
+            ))
+          ) : (
+            <div style={{ padding: '20px', backgroundColor: '#f9f9f9', borderRadius: '8px', width: '100%', gridColumn: '1 / -1' }}>
+              <p style={{ color: 'grey', margin: 0 }}>You haven't enrolled in any courses yet. Explore courses to get started!</p>
             </div>
-          ))}
+          )}
         </div>
       </main>
 
       {/* RIGHT PANEL */}
       <aside className={styles.rightPanel} style={{ padding: "0" }}>
         <div className={styles.profileSection} style={{ display: "flex", alignItems: "center", gap: "20px", backgroundColor: "rgba(127, 150, 81, 0.4)", padding: "25px" }}>
-          <img src="/yashaswini.png" className={styles.avatar} alt="Yashaswini MN" />
+          {/* DYNAMIC AVATAR */}
+          <img
+            src={user?.avatar || "/yashaswini.png"}
+            className={styles.avatar}
+            alt={user?.name || "Student"}
+            style={{ width: "60px", height: "60px", borderRadius: "50%", objectFit: "cover" }}
+          />
           <div className={styles.profileInfo} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <h3>Yashaswini MN</h3>
+            {/* DYNAMIC NAME */}
+            <h3>{user?.name || "Student"}</h3>
             <p>College Student</p>
             <button className={styles.editBtn} style={{ padding: "2px 15px", border: "none", backgroundColor: "black", color: "white", borderRadius: "4px", marginTop: "5px" }}>Edit Profile</button>
           </div>
@@ -231,31 +280,41 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className={styles.eventBox} style={{ border: "1px solid grey", display: "flex", flexDirection: "column", alignItems: "center", padding: "10px", gap: "5px", borderRadius: "5px", margin: "10px" }}>
-          <p>Q&A session with mentors</p>
-          <strong>03:00 PM - 05:00 PM</strong>
-          <button style={{ padding: "3px" }}>Join the Event</button>
-        </div>
+        {/* DYNAMIC EVENTS & TASKS (Kept your layout structure exact) */}
+        {events.length > 0 && events[0] && (
+          <div className={styles.eventBox} style={{ border: "1px solid grey", display: "flex", flexDirection: "column", alignItems: "center", padding: "10px", gap: "5px", borderRadius: "5px", margin: "10px" }}>
+            <p>{events[0].title}</p>
+            <strong>{events[0].timeWindow}</strong>
+            <button style={{ padding: "3px" }}>{events[0].actionText}</button>
+          </div>
+        )}
 
         <div className={styles.todoList} style={{ border: "1px solid grey", display: "flex", flexDirection: "column", alignItems: "flex-start", padding: "15px", gap: "10px", borderRadius: "8px", margin: "10px" }}>
           <h3 style={{ alignSelf: "center" }}>To-do List</h3>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, width: "100%" }}>
-            <li className={styles.todoItem} style={{ display: "flex", gap: "10px" }}>
-              <span style={{ color: "#7F9651", fontSize: "30px" }}>•</span>
-              <div><p style={{ margin: 0 }}>Developing a simple chat application</p><small>Submission on Sun 31st</small></div>
-            </li>
-            <li className={styles.todoItem} style={{ display: "flex", gap: "10px" }}>
-              <span style={{ color: "#7F9651", fontSize: "30px" }}>•</span>
-              <div><p style={{ margin: 0 }}>Assignment 1</p><small>Submission on Fri 29th</small></div>
-            </li>
+            {tasks.length > 0 ? (
+              tasks.map((task, idx) => (
+                <li key={idx} className={styles.todoItem} style={{ display: "flex", gap: "10px" }}>
+                  <span style={{ color: "#7F9651", fontSize: "30px" }}>•</span>
+                  <div>
+                    <p style={{ margin: 0 }}>{task.title}</p>
+                    <small>Due: {new Date(task.dueDate).toLocaleDateString()}</small>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <p style={{ color: "grey", fontSize: "14px", textAlign: "center", width: "100%", margin: "10px 0" }}>No tasks due right now! 🎉</p>
+            )}
           </ul>
         </div>
 
-        <div className={styles.eventBox} style={{ border: "1px solid grey", display: "flex", flexDirection: "column", alignItems: "center", padding: "10px", gap: "5px", borderRadius: "5px", margin: "10px" }}>
-          <h3>Mock Interviews</h3>
-          <p>From 11:00AM - 1:00PM</p>
-          <button style={{ padding: "3px" }}>Join Mock Interview</button>
-        </div>
+        {events.length > 1 && events[1] && (
+          <div className={styles.eventBox} style={{ border: "1px solid grey", display: "flex", flexDirection: "column", alignItems: "center", padding: "10px", gap: "5px", borderRadius: "5px", margin: "10px" }}>
+            <h3>{events[1].title}</h3>
+            <p>{events[1].timeWindow}</p>
+            <button style={{ padding: "3px" }}>{events[1].actionText}</button>
+          </div>
+        )}
       </aside>
     </div>
   );
