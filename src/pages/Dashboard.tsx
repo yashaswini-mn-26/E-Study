@@ -224,20 +224,25 @@ const Dashboard: React.FC = () => {
         <div className={styles.courseGrid}>
           {/* DYNAMIC COURSES WITH EMPTY STATE */}
           {enrolledCourses.length > 0 ? (
-            enrolledCourses.map((enrollment, idx) => (
-              <div key={idx} className={styles.courseCard}>
-                <img src={enrollment.course.thumbnail} alt={enrollment.course.title} className={styles.courseThumb} />
-                <p style={{ fontSize: "14px", marginBottom: "5px", fontWeight: "bold" }}>{enrollment.course.title}</p>
-                <div className={styles.progressRow}>
-                  <div className={styles.progressBar}><div style={{ width: `${enrollment.progress}%` }}></div></div>
-                  <span style={{ fontSize: "12px", color: "grey" }}>{enrollment.progress}% Completed</span>
+            enrolledCourses.map((enrollment, idx) => {
+              // 🚨 THE FIX: If the course was deleted or missing from the DB, skip it so the app doesn't crash!
+              if (!enrollment.course) return null;
+
+              return (
+                <div key={idx} className={styles.courseCard}>
+                  <img src={enrollment.course.thumbnail || ""} alt={enrollment.course.title} className={styles.courseThumb} />
+                  <p style={{ fontSize: "14px", marginBottom: "5px", fontWeight: "bold" }}>{enrollment.course.title}</p>
+                  <div className={styles.progressRow}>
+                    <div className={styles.progressBar}><div style={{ width: `${enrollment.progress}%` }}></div></div>
+                    <span style={{ fontSize: "12px", color: "grey" }}>{enrollment.progress}% Completed</span>
+                  </div>
+                  <div className={styles.authorRow} style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "10px" }}>
+                    <img src={`https://i.pravatar.cc/150?u=${idx}`} alt={enrollment.course.authorName} style={{ height: "40px", borderRadius: "50%" }} />
+                    <p style={{ fontSize: "12px" }}><strong>{enrollment.course.authorName}</strong><br /> {enrollment.course.authorRole}</p>
+                  </div>
                 </div>
-                <div className={styles.authorRow} style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "10px" }}>
-                  <img src={`https://i.pravatar.cc/150?u=${idx}`} alt={enrollment.course.authorName} style={{ height: "40px", borderRadius: "50%" }} />
-                  <p style={{ fontSize: "12px" }}><strong>{enrollment.course.authorName}</strong><br /> {enrollment.course.authorRole}</p>
-                </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <div style={{ padding: '20px', backgroundColor: '#f9f9f9', borderRadius: '8px', width: '100%', gridColumn: '1 / -1' }}>
               <p style={{ color: 'grey', margin: 0 }}>You haven't enrolled in any courses yet. Explore courses to get started!</p>
@@ -260,7 +265,7 @@ const Dashboard: React.FC = () => {
             {/* DYNAMIC NAME */}
             <h3>{user?.name || "Student"}</h3>
             <p>College Student</p>
-            <button className={styles.editBtn} style={{ padding: "2px 15px", border: "none", backgroundColor: "black", color: "white", borderRadius: "4px", marginTop: "5px" }}>Edit Profile</button>
+            <button className={styles.editBtn} style={{ padding: "4px 15px", border: "none", backgroundColor: "#838f9e", color: "white", borderRadius: "4px", marginTop: "8px" }}>Edit Profile</button>
           </div>
         </div>
 

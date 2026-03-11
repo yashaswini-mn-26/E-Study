@@ -3,13 +3,20 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  overflow: auto;
+  overflow: hidden;
   font-family: 'Jost', sans-serif;
+}
+
+/* THE MAGIC FIX 1: Stops borders and padding from stretching the screen */
+.wrapper * {
+  box-sizing: border-box;
 }
 
 .container {
   display: flex;
   flex: 1;
+  overflow: hidden;
+  height: 100%;
 }
 
 /* Sidebar consistency */
@@ -109,6 +116,8 @@
   display: flex;
   flex-direction: column;
   background: #fff;
+  overflow: hidden;
+  height: 100%; /* Keeps it strictly inside the container */
 }
 
 .chatHeader {
@@ -136,6 +145,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  min-height: 0; /* THE MAGIC FIX 2: Forces body to scroll instead of stretching indefinitely */
 }
 
 .msgIn { align-self: flex-start; max-width: 60%; }
@@ -158,6 +168,9 @@
 
 .chatFooter {
   padding: 20px 40px;
+  background: #fff;
+  flex-shrink: 0; /* THE MAGIC FIX 3: Refuses to let the footer shrink or get pushed off-screen */
+  border-top: 1px solid #eee;
 }
 
 .inputContainer {
@@ -266,4 +279,44 @@
     width: 40px !important;
     height: 40px !important;
   }
+}
+
+/* --- NEW CSS FOR ONLINE DOT & BADGES --- */
+.avatarWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.onlineDot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #25D366; /* WhatsApp Green */
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.unreadBadge {
+  background-color: #7f9651;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 7px;
+  border-radius: 12px;
+  margin-left: auto; /* Pushes it to the far right */
+}
+
+/* Update this existing class to ensure flex behaves well with the badge */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1; 
+}
+
+.contactHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
